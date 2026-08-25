@@ -23,7 +23,7 @@ linters:
     - unparam
     - prealloc
     - goconst
-    - gomodguard
+    - gomodguard_v2
     - revive
     - nilerr
     - testpackage

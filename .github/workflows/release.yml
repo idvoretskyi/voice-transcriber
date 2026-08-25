@@ -34,7 +34,7 @@ permissions:
   security-events: write
 
 env:
-  GO_VERSION: '1.25.9'
+  GO_VERSION: '1.27.0'
 
 jobs:
   # Manual tag creation (only for workflow_dispatch)
@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -94,13 +94,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Set up Go
         id: setup
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
 
@@ -115,7 +115,7 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Cache Go modules
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cache/go-build
@@ -135,7 +135,7 @@ jobs:
           go test -v -bench=. -benchmem ./...
 
       - name: Upload test coverage
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         if: always()
         with:
           files: ./coverage.out
@@ -151,24 +151,24 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Set up Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
 
       - name: Run linter
         uses: golangci/golangci-lint-action@v9
         with:
-          version: v2.11.4
+          version: v2.13.1
           args: --timeout=5m --verbose
 
       - name: Run Go security scanner
         run: |
-          go install github.com/securego/gosec/v2/cmd/gosec@v2.25.0
+          go install github.com/securego/gosec/v2/cmd/gosec@v2.28.0
           echo "$HOME/go/bin" >> $GITHUB_PATH
           gosec -fmt sarif -out gosec-results.sarif ./...
 
@@ -187,12 +187,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Set up Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
 
@@ -233,7 +233,7 @@ jobs:
         os: [linux, darwin]
         arch: [amd64, arm64]
     with:
-      go-version: '1.25.9'
+      go-version-file: go.mod
       config-file: .slsa-goreleaser/${{ matrix.os }}-${{ matrix.arch }}.yml
       evaluated-envs: >-
         VERSION:${{ needs.pre-release-checks.outputs.version ||

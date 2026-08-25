@@ -20,6 +20,12 @@ import (
 	"testing"
 )
 
+// CLI tokens used across multiple test cases.
+const (
+	flagHelp      = "--help"
+	cmdTranscribe = "transcribe"
+)
+
 // binaryPath holds the path to the compiled binary built by TestMain.
 var binaryPath string
 
@@ -145,19 +151,19 @@ func TestHelp(t *testing.T) {
 		},
 		{
 			name:     "root --help",
-			args:     []string{"--help"},
+			args:     []string{flagHelp},
 			wantOut:  []string{"Multilingual media-to-text transcription", "--language", "--model", "--location"},
 			exitCode: 0,
 		},
 		{
 			name:     "transcribe --help",
-			args:     []string{"transcribe", "--help"},
+			args:     []string{cmdTranscribe, flagHelp},
 			wantOut:  []string{"Transcribe a video or audio file", "--output"},
 			exitCode: 0,
 		},
 		{
 			name:     "version --help",
-			args:     []string{"version", "--help"},
+			args:     []string{"version", flagHelp},
 			wantOut:  []string{"Show version information"},
 			exitCode: 0,
 		},
@@ -203,17 +209,17 @@ func TestArgValidation(t *testing.T) {
 		},
 		{
 			name:    "transcribe missing argument",
-			args:    []string{"transcribe"},
+			args:    []string{cmdTranscribe},
 			wantErr: "accepts 1 arg(s), received 0",
 		},
 		{
 			name:    "transcribe too many arguments",
-			args:    []string{"transcribe", "a", "b"},
+			args:    []string{cmdTranscribe, "a", "b"},
 			wantErr: "accepts 1 arg(s), received 2",
 		},
 		{
 			name:    "transcribe unknown flag",
-			args:    []string{"transcribe", "--badarg"},
+			args:    []string{cmdTranscribe, "--badarg"},
 			wantErr: "unknown flag: --badarg",
 		},
 	}
@@ -239,7 +245,7 @@ func TestArgValidation(t *testing.T) {
 func TestFlagDefaults(t *testing.T) {
 	t.Parallel()
 
-	stdout, _, _ := run(t, nil, "transcribe", "--help")
+	stdout, _, _ := run(t, nil, cmdTranscribe, flagHelp)
 
 	tests := []struct {
 		name string
@@ -285,7 +291,7 @@ func TestGCPErrorPaths(t *testing.T) {
 			"HOME=" + os.Getenv("HOME"),
 		}
 
-		_, stderr, exitCode := run(t, env, "transcribe", "nonexistent.mp4")
+		_, stderr, exitCode := run(t, env, cmdTranscribe, "nonexistent.mp4")
 
 		if exitCode != 1 {
 			t.Errorf("exit code: want 1, got %d", exitCode)
@@ -309,7 +315,7 @@ func TestGCPErrorPaths(t *testing.T) {
 			"GOOGLE_APPLICATION_CREDENTIALS=/nonexistent/credentials.json",
 		}
 
-		_, stderr, exitCode := run(t, env, "transcribe", "nonexistent.mp4")
+		_, stderr, exitCode := run(t, env, cmdTranscribe, "nonexistent.mp4")
 
 		if exitCode != 1 {
 			t.Errorf("exit code: want 1, got %d", exitCode)

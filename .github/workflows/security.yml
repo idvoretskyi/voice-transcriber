@@ -15,7 +15,7 @@ permissions:
   pull-requests: write
 
 env:
-  GO_VERSION: '1.25.10'
+  GO_VERSION: '1.27.0'
 
 jobs:
   # Go-based security scanners (gosec, govulncheck)
@@ -41,10 +41,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Set up Go
-      uses: actions/setup-go@v6
+      uses: actions/setup-go@v7
       with:
         go-version-file: go.mod
         cache: true
@@ -53,7 +53,7 @@ jobs:
       run: |
         case "${{ matrix.tool }}" in
           gosec)
-            go install github.com/securego/gosec/v2/cmd/gosec@v2.25.0
+            go install github.com/securego/gosec/v2/cmd/gosec@v2.28.0
             echo "$HOME/go/bin" >> $GITHUB_PATH
             ;;
           govulncheck)
@@ -82,7 +82,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@v0.36.0
@@ -110,10 +110,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Set up Go
-      uses: actions/setup-go@v6
+      uses: actions/setup-go@v7
       with:
         go-version-file: go.mod
         cache: true
@@ -164,7 +164,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
     
     - name: Dependency Review
       uses: actions/dependency-review-action@v5

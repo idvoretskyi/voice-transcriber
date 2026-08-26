@@ -1,0 +1,2 @@
+# False positive for this repository: the vulnerable package is openpgp, which is not imported.
+GO-2026-5932

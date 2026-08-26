@@ -89,6 +89,7 @@ jobs:
       with:
         scan-type: 'fs'
         scan-ref: '.'
+        trivyignores: '.trivyignore'
         format: 'sarif'
         output: 'trivy-results.sarif'
 

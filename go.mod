@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/spf13/cobra v1.10.2
-	google.golang.org/genai v1.69.0
+	google.golang.org/genai v1.70.0
 )
 
 require (

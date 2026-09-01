@@ -24,7 +24,7 @@ Single-binary media-to-text transcription with automatic language detection, pow
 ### Prerequisites
 
 ```bash
-# Go 1.25+
+# Go 1.27+
 brew install go            # macOS
 # sudo apt install golang-go  # Ubuntu/Debian
 

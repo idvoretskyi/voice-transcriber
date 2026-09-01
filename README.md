@@ -5,7 +5,7 @@ Single-binary media-to-text transcription with automatic language detection, pow
 [![CI](https://github.com/idvoretskyi/voice-transcriber/actions/workflows/ci.yml/badge.svg)](https://github.com/idvoretskyi/voice-transcriber/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/idvoretskyi/voice-transcriber/actions/workflows/codeql.yml/badge.svg)](https://github.com/idvoretskyi/voice-transcriber/actions/workflows/codeql.yml)
 [![Security](https://github.com/idvoretskyi/voice-transcriber/actions/workflows/security.yml/badge.svg)](https://github.com/idvoretskyi/voice-transcriber/actions/workflows/security.yml)
-[![Go version](https://img.shields.io/badge/go-1.25-00ADD8?logo=go)](https://go.dev/dl/)
+[![Go version](https://img.shields.io/badge/go-1.27-00ADD8?logo=go)](https://go.dev/dl/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Features
@@ -24,7 +24,7 @@ Single-binary media-to-text transcription with automatic language detection, pow
 ### Prerequisites
 
 ```bash
-# Go 1.25+
+# Go 1.27+
 brew install go            # macOS
 # sudo apt install golang-go  # Ubuntu/Debian
 

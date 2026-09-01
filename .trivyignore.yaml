@@ -1,0 +1,15 @@
+# Trivy vulnerability suppressions.
+#
+# Entries MUST carry a justification and an expiry date. On expiry the finding
+# is reported again, forcing a re-review rather than silently persisting.
+
+vulnerabilities:
+  - id: GO-2026-5932
+    statement: >-
+      golang.org/x/crypto/openpgp is not in this module's build graph:
+      `go list -deps ./...` reports no openpgp package, and `go mod why
+      golang.org/x/crypto` reports "main module does not need package
+      golang.org/x/crypto". The advisory has no upstream fix (Fixed in: N/A),
+      so it cannot be resolved by upgrading. Re-verify reachability on expiry
+      and remove this entry if openpgp ever enters the build graph.
+    expired_at: 2027-02-28

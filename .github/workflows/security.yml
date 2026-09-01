@@ -89,7 +89,7 @@ jobs:
       with:
         scan-type: 'fs'
         scan-ref: '.'
-        trivyignores: '.trivyignore'
+        trivyignores: '.trivyignore.yaml'
         format: 'sarif'
         output: 'trivy-results.sarif'
 

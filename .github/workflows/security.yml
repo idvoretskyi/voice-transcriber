@@ -15,7 +15,7 @@ permissions:
   pull-requests: write
 
 env:
-  GO_VERSION: '1.27.0'
+  GO_VERSION: '1.27.3'
 
 jobs:
   # Go-based security scanners (gosec, govulncheck)
@@ -57,7 +57,7 @@ jobs:
             echo "$HOME/go/bin" >> $GITHUB_PATH
             ;;
           govulncheck)
-            go install golang.org/x/vuln/cmd/govulncheck@v1.2.0
+            GOTOOLCHAIN=local go install golang.org/x/vuln/cmd/govulncheck@v1.2.0
             echo "$HOME/go/bin" >> $GITHUB_PATH
             ;;
         esac
